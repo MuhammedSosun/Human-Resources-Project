@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds"><!-- uygulama yeniden başlatmaya gerek kalmaz 30 saniyede bir tekrar kontrol sağlar -->
+
+    <!-- Spring Boot default logback config dosyasını dahil et (log düzeylerini de buradan çekebiliriz) application
+     properties te bazı tanımların çalışmasını sağlar-->
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <!--  Logstash TCP Appender logu nereye gönderceğini söyler -->
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <!--  logstashtaki port -->
+        <destination>localhost:5000</destination>
+
+        <!--  JSON yapıyı özelleştiriyoruz json formatına dönüştürürüz -->
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp>
+                    <fieldName>@timestamp</fieldName>
+                </timestamp>
+                <!-- mikro servis mimarisinde sık kullanılır hangi servisten geldiği anlaşılır her logda var -->
+                <globalCustomFields>{"service":"human-resources-app"}</globalCustomFields>
+
+                <pattern>
+                    <pattern>
+                        {
+                        "severity": "%level",
+                        "logger": "%logger{36}",
+                        "trace_id": "%X{trace_id}",
+                        "thread": "%thread",
+                        "message": "%message"
+                        }
+                    </pattern>
+                </pattern>
+
+                <stackTrace>
+                    <fieldName>exception</fieldName>
+                </stackTrace>
+
+                <!-- Sihir burada -->
+                <callerData>
+                    <classFieldName>class</classFieldName>
+                    <methodFieldName>method</methodFieldName>
+                    <lineFieldName>line</lineFieldName>
+                    <fileFieldName>file</fileFieldName>
+                </callerData>
+
+                <mdc />
+            </providers>
+
+        </encoder>
+    </appender>
+
+    <!--  Konsola da JSON log basmak istersen system.out yerine JSON formatında log gösterir. -->
+    <appender name="JSON_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+    </appender>
+    <!-- application logları-->
+    <logger name="com.HumanResourcesProject.service" level="INFO"/>
+    <logger name="com.HumanResourcesProject.controller" level="INFO"/>
+    <logger name="com.HumanResourcesProject.scheduler" level="INFO"/>
+    <logger name="com.HumanResourcesProject.notification" level="INFO"/>
+
+    <!-- diğer log türleri-->
+    <logger name="com.HumanResourcesProject.handler" level="ERROR"/>
+
+    <!--  Log seviyeleri -->
+    <root level="INFO">
+        <appender-ref ref="LOGSTASH"/>
+        <appender-ref ref="JSON_CONSOLE"/>
+    </root>
+
+</configuration>

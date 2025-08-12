@@ -1,6 +1,6 @@
 
 Englis version = this Readme 
-Turkis Version = README_TR.md
+Turkish Version = [README_TR.md](https://github.com/Sosun044/Human-Resources-Project/blob/main/README_TR.md)
 
 📌 Project Overview
 The HR Management System is a full-stack application I developed to manage personnel, inventory, and assignment operations with secure authentication and real-time notifications.

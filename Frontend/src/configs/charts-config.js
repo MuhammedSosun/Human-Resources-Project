@@ -7,6 +7,7 @@ export const chartsConfig = {
   title: {
     show: "",
   },
+  //grafiklerin renklerinin verdiğim yer
   dataLabels: {
     enabled: false,
   },

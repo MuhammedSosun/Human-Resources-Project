@@ -77,8 +77,6 @@ public class PersonalControllerImpl extends RestBaseController implements IPerso
         else if (request.getPageNumber() < 0 || request.getPageNumber() == 0){
             request.setPageNumber(0);
         }
-
-
         return ok(personalService.findAll(request));
     }
     @GetMapping("/filterByInfo")

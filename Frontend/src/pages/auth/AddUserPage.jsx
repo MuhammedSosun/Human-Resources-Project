@@ -28,15 +28,18 @@ export function AddUserPage() {
       username: "",
       password: "",
       role: "",
+      registrationNo: "",
     },
     validationSchema: signUpSchema,
     onSubmit: async (values) => {
+      console.log(values);
       try {
         setIsLoading(true);
         const payload = {
           username: values.username.trim(),
           password: values.password,
           role: values.role.toUpperCase(),
+          registrationNo: values.registrationNo,
         };
 
         await api.post("/register", payload);
@@ -71,7 +74,6 @@ export function AddUserPage() {
 
           <CardBody>
             <form onSubmit={formik.handleSubmit} className="space-y-6">
-              {/* Username */}
               <div>
                 <Typography variant="small" className="mb-1 font-medium text-gray-700">
                   Kullanıcı Adı
@@ -90,8 +92,6 @@ export function AddUserPage() {
                   </Typography>
                 )}
               </div>
-
-              {/* Password */}
               <div>
                 <Typography variant="small" className="mb-1 font-medium text-gray-700">
                   Şifre
@@ -112,7 +112,6 @@ export function AddUserPage() {
                 )}
               </div>
 
-              {/* Role */}
               <div>
                 <Typography variant="small" className="mb-1 font-medium text-gray-700">
                   Rol
@@ -131,16 +130,28 @@ export function AddUserPage() {
                   <Typography className="text-red-500 text-xs mt-1">
                     {formik.errors.role}
                   </Typography>
+
                 )}
+                <Typography variant="small" className="mb-1 font-medium text-gray-700">
+                  Sicil No
+                </Typography>
+                <Input
+                  name="registrationNo"
+                  type="registrationNo"
+                  value={formik.values.registrationNo}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  placeholder="Lütfen Personal ekleyecekseniz Sicil Numarası giriniz"
+                />
               </div>
 
-              {/* Submit */}
               <MTButton type="submit" fullWidth disabled={isLoading}>
                 <div className="flex items-center justify-center gap-2">
                   <UserCircleIcon className="h-5 w-5" />
                   {isLoading ? "Ekleniyor..." : "Kullanıcı Ekle"}
                 </div>
               </MTButton>
+
 
               <Button
                 variant="contained"

@@ -13,5 +13,4 @@ public class PageableRequest {
         private String ColumnName;
 
         private boolean asc;
-
 }

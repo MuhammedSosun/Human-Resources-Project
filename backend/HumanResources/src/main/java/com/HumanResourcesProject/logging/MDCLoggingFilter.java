@@ -40,7 +40,6 @@ public class MDCLoggingFilter extends OncePerRequestFilter {
         }finally {
             MDC.clear();
         }
-
     }
     private String getClientApi(HttpServletRequest request){
         String ip = request.getHeader("X-Forwarded-For");
@@ -76,8 +75,7 @@ public class MDCLoggingFilter extends OncePerRequestFilter {
                 body);
     }
     private void setResponseHeader(HttpServletResponse response){
-        response.addHeader("X_TRACE_ID",MDCUtil.getTraceId());
-    }
+        response.addHeader("X-Trace-Id", MDC.get("trace_id"));    }
 
 
 }

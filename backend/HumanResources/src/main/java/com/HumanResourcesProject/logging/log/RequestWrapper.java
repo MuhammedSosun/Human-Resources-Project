@@ -46,7 +46,6 @@ public class RequestWrapper extends HttpServletRequestWrapper {
             public int read() throws IOException {
                 return byteArrayInputStream.read();
             }
-
             @Override
             public boolean isFinished() {
                 return false;

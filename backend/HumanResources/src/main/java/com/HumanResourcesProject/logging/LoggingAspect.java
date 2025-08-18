@@ -13,15 +13,15 @@ import org.springframework.util.StopWatch;
 @Aspect
 @Component
 public class LoggingAspect {
-//database için bütün işlemelri loglayan ortak bir yerden yönetebilmemi sağlayan bir uygulama var ve spring ile ilgili
-    //enverse implement edilecek
-    //önce loglama request response sonra maskeleme sonra yukardaki bu bitti
-    @Around("@annotation(loggableOperation)")
+
+    @Around("@annotation(loggableOperation)")//üzerinde @LoggableOperation olan tüm methodların çağrılarını sarar
+    //bu çağrılmadan method çalışmaz ilk önce bu çağrılır
     public Object logExecution(ProceedingJoinPoint joinPoint,
                                LoggableOperation loggableOperation) throws Throwable {
+        // süre ölçümünde kullanılır
     StopWatch stopWatch = new StopWatch();
     stopWatch.start();
-
+    // enumdan alınan alanımızı MDC ile satırlara otomotik ekleriz
     OperationType operation = loggableOperation.value();
     String methodName = joinPoint.getSignature().toShortString();
     Object[] args = joinPoint.getArgs();

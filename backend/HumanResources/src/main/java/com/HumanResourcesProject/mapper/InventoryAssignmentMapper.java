@@ -14,10 +14,7 @@ public class InventoryAssignmentMapper {
 
     public static InventoryAssignment toEntity(DtoInventoryAssignmentIU dto,Inventory inventory,Personal personal){
         InventoryAssignment inventoryAssignment = new InventoryAssignment();
-        inventoryAssignment.setAssignedBy(dto.getAssignBy());
-        inventoryAssignment.setReturnedBy(dto.getReturnedBy());
-        inventoryAssignment.setAssignDate(dto.getAssignDate());
-        inventoryAssignment.setReturnedDate(dto.getReturnDate());
+        updateInventory(inventoryAssignment, dto);
         inventoryAssignment.setCreateTime(LocalDateTime.now());
 
         inventoryAssignment.setPersonal(personal);

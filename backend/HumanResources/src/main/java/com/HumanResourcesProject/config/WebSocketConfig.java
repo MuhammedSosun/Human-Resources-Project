@@ -31,9 +31,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         this.userDetailsService = userDetailsService;
     }
 
-
-
-
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
         config.enableSimpleBroker("/topic","/queue");
@@ -41,14 +38,15 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         config.setApplicationDestinationPrefixes("/app");
         log.info("connected configureMessageBroker successfully");
     }
-
+    //bu method ta izinleri sağlıyoruz tüm herkes erişebiliri "*"
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws")
                 .setAllowedOriginPatterns("*");
         log.info("registerStompEndpoints successfully");
     }
-
+  //bu güvenlik için token bilgilerine göre websocket işlemine tanınmıs özel method
+    //bu yorumu düzelt tam açık değil!!
     @Override
     public void configureClientInboundChannel(ChannelRegistration registration) {
         registration.interceptors(new ChannelInterceptor() {
@@ -77,7 +75,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                     UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
                     if (!jwtService.isTokenValid(jwt, userDetails)) {
-                        log.warn("🚫 STOMP bağlantısı → Token geçersiz. Kullanıcı: {}", username);
+                        log.warn("STOMP bağlantısı → Token geçersiz. Kullanıcı: {}", username);
                         return message;
                     }
 

@@ -28,6 +28,6 @@ public class MDCUtil {
     }
 
     public static String getTraceId() {
-        return TRACE_ID;
+        return MDC.get(TRACE_ID);
     }
 }

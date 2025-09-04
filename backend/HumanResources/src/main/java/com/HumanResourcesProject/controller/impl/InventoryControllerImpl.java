@@ -55,27 +55,7 @@ public class InventoryControllerImpl extends RestBaseController implements IInve
         }
         return ok(iInventoryService.findAll(request));
     }
-    /*
-    @PreAuthorize("hasAnyRole('ADMIN', 'IK' , 'ENVANTER')")
-    @GetMapping("/filter/{id}")
-    @Override
-    public RootEntity<List<DtoInventory>> filterByType(@PathVariable(required = false) Long typeId) {
-        return ok(iInventoryService.filterByType(typeId));
-    }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'IK' , 'ENVANTER')")
-    @GetMapping("/find/{id}")
-    @Override
-    public RootEntity<DtoInventory> findById(@PathVariable Long id) {
-        return ok(iInventoryService.findInventoryById(id));
-    }
-    @GetMapping("/filter/by/status")
-    @PreAuthorize("hasAnyRole('ADMIN', 'IK' , 'ENVANTER')")
-    @Override
-    public RootEntity<List<DtoInventory>> findStatus(@RequestParam InventoryStatus status) {
-        return ok(iInventoryService.findStatus(status));
-    }
-*/
     @PreAuthorize("hasAnyRole('ADMIN','ENVANTER')")
     @PutMapping("/update/{id}")
     @Override

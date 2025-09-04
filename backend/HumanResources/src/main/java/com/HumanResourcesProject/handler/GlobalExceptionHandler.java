@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+//bu sınıfla beraber biz nerde exception yakalarsak onu döneriz
 @Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {

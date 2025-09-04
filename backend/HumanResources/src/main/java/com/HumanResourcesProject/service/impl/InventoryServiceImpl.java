@@ -56,34 +56,7 @@ public class InventoryServiceImpl implements IInventoryService {
 
         return PageUtil.toPageableResponse(page,dtoList);
     }
-/*
-    @Override
-    public DtoInventory findInventoryById(Long id) {
-        Inventory inventory = inventoryRepository.findById(id).orElseThrow(()->
-                new BaseException(new ErrorMessage(MessageType.INVENTORY_NOT_FOUND,id.toString())));
-        return InventoryMapper.toDto(inventory);
-    }
 
-    @Override
-    public List<DtoInventory> filterByType(Long typeId) {
-        List<Inventory> inventoryList;
-        if (typeId == null){
-            inventoryList =  inventoryRepository.findAll();
-        }
-        else {
-            inventoryList = inventoryRepository.findByInventoryTypes_Id(typeId);
-        }
-        return inventoryList.stream().map(InventoryMapper::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<DtoInventory> findStatus(InventoryStatus status) {
-        List<Inventory> list = inventoryRepository.findByStatus(status);
-        return list.stream().map(
-                InventoryMapper::toDto
-        ).toList();
-    }
-*/
     @LoggableOperation(OperationType.INVENTORY_UPDATE)
     @Override
     public DtoInventory update(Long id, DtoInventoryIU dto) {

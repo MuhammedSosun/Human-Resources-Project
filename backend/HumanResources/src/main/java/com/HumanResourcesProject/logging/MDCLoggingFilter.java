@@ -33,8 +33,6 @@ public class MDCLoggingFilter extends OncePerRequestFilter {
             log.info(requestLogFormatString(requestWrapper));
             String ip = getClientApi(request);
             MDC.put("ip", ip);
-
-
             filterChain.doFilter(requestWrapper, responseWrapper);
             log.info(responseLogFormatString(responseWrapper));
         }finally {
@@ -76,7 +74,5 @@ public class MDCLoggingFilter extends OncePerRequestFilter {
     }
     private void setResponseHeader(HttpServletResponse response){
         response.addHeader("X-Trace-Id", MDC.get("trace_id"));    }
-
-
 }
 

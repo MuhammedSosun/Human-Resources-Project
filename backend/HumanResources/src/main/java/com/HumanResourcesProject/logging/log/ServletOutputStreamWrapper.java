@@ -15,7 +15,7 @@ public class ServletOutputStreamWrapper extends ServletOutputStream {
         this.outputStream = outputStream;
         this.copy = new ByteArrayOutputStream();
     }
-
+    //ServletOutputStream dan override ettiğimiz methodlar
     @Override
     public boolean isReady() {
         return true;

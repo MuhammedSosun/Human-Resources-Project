@@ -18,12 +18,13 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
     public ResponseWrapper(HttpServletResponse response) {
         super(response);
     }
-
+    //headerleri aldıgımız method tıpkı RequestWrapper sınıfında yazdıgımız gibi
     public Map<String, String> getAllHeaders() {
         Map<String,String> headers = new HashMap<>();
         getHeaderNames().forEach(header ->headers.put(header,getHeader(header)));
         return headers;
     }
+    //HttpServletResponseWrapper bir kere dönen responsu biz tekrar tekrar kullanmak için copi attribute ye atıyoruz
     @Override
     public ServletOutputStream getOutputStream() throws IOException {
         if (printWriter != null){
@@ -35,6 +36,7 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
         }
         return copi;
     }
+    //dönen çıktıyı printwritera yazıyoruz
     @Override
     public PrintWriter getWriter() throws IOException {
         if (outputStream != null) {
@@ -47,6 +49,7 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
         }
         return printWriter;
     }
+
     @Override
     public void flushBuffer() throws IOException {
         if (printWriter != null){
@@ -55,6 +58,7 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
             copi.flush();
         }
     }
+
     public byte[] getCopyBody() {
         if (copi != null){
             return copi.getCopy();

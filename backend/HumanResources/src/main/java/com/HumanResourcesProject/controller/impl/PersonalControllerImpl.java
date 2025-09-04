@@ -109,33 +109,6 @@ public class PersonalControllerImpl extends RestBaseController implements IPerso
         return ok(personalService.search(filter));
     }
 
-
-/*
-    @GetMapping("/search")
-    @PreAuthorize("hasAnyRole('ADMIN', 'IK')")
-    @Override
-    public RootEntity<PageableEntity<DtoPersonal>> search(
-            @RequestParam(required = false) String firstName,
-            @RequestParam(required = false) String lastName,
-            @RequestParam(required = false) String tckn,
-            @RequestParam(required = false) Unit unit,PageableRequest request) {
-
-        DtoPersonalFilter filter = new DtoPersonalFilter();
-        filter.setFirstName(firstName);
-        filter.setLastName(lastName);
-        filter.setTckn(tckn);
-        filter.setUnit(unit);
-        if (request.getPageSize() < 0 || request.getPageSize() == 0){
-            request.setPageSize(10);
-        }
-        if (request.getPageNumber() == 0 ||request.getPageNumber() < 0){
-            request.setPageNumber(0);
-        }
-
-        return ok(personalService.search(filter,request));
-    }
-    */
-
     @GetMapping("/get/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'IK')")
     @Override

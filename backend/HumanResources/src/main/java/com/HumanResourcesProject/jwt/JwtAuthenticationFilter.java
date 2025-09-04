@@ -57,7 +57,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             logger.warn("Token süresi dolmuş. Hata: {}", e.getMessage());
             throw new BaseException(new ErrorMessage(MessageType.TOKEN_IS_EXPIRED, e.getMessage()));
         } catch (Exception e) {
-            logger.error("❌ Token çözümlemesi sırasında genel hata oluştu: {}", e.getMessage());
+            logger.error("Token çözümlemesi sırasında genel hata oluştu: {}", e.getMessage());
             throw new BaseException(new ErrorMessage(MessageType.GENERAL_EXCEPTION, e.getMessage()));
         }
 
@@ -69,9 +69,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 UsernamePasswordAuthenticationToken auth =
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(auth);
-                logger.info("🔐 Kullanıcı doğrulandı ve SecurityContext'e eklendi.");
+                logger.info("Kullanıcı doğrulandı ve SecurityContext'e eklendi.");
             } else {
-                logger.warn("🚫 Token geçersiz. Kullanıcı: {}", username);
+                logger.warn("Token geçersiz. Kullanıcı: {}", username);
             }
         }
 

@@ -128,11 +128,32 @@ Logstash, logları işleyerek Elasticsearch’e iletir.
 
 Kibana, hr-logs-* index pattern’i ile logları görselleştirir.
 
-⚠️ Not
-Proje tam Docker kurulumu ile gelmemektedir.
-Sadece Elasticsearch ve Kibana Docker üzerinden çalışmaktadır.
-Uygulamayı başlatmak için backend ve frontend’i local ortamdan çalıştırın.
+⚠️ Not  
+Proje tam Docker kurulumu ile gelmemektedir.  
+Sadece Elasticsearch ve Kibana Docker üzerinden çalışmaktadır.  
+Uygulamayı başlatmak için backend ve frontend’i local ortamdan çalıştırın.  
 
+Eğer backend’i de Docker üzerinden çalıştırmak isterseniz, proje içinde **Dockerfile** hazırdır.  
+Bu durumda `application-dev.properties` ortamını seçmeniz gerekir.  
+
+`docker-compose.yml` dosyasına aşağıdaki servisi ekleyerek backend’i Docker ile ayağa kaldırabilirsiniz:  
+
+  app:
+    build: .
+    container_name: hr_app
+    depends_on:
+      - logstash
+      - elasticsearch
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - "C:/Users/VivaVeste/OneDrive/Desktop/Pp:/app/uploads"
+    networks:
+      - elk
+
+postgresql içinde docker da ayağa kaldırabilirsiniz fakat docker-compose.yml içine postgre sql ayarları yazmanız lazım
 
 
 

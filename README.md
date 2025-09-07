@@ -134,9 +134,30 @@ Kibana visualizes logs with index pattern: hr-logs-*.
 
 ⚠️ Note
 The project does not come with a full Docker setup.
-Only Elasticsearch and Kibana are provided via Docker.
-Please run the backend and frontend locally to start the application.
+Only Elasticsearch and Kibana run through Docker.
+To start the application, run the backend and frontend locally.
 
+If you also want to run the backend in Docker, a Dockerfile is already included in the project.
+In this case, you need to select the application-dev.properties environment.
+
+You can add the following service to the docker-compose.yml file to start the backend with Docker:
+
+  app:
+    build: .
+    container_name: hr_app
+    depends_on:
+      - logstash
+      - elasticsearch
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - "C:/Users/VivaVeste/OneDrive/Desktop/Pp:/app/uploads"
+    networks:
+      - elk
+
+You can also run PostgreSQL inside Docker, but you will need to add PostgreSQL configuration to the docker-compose.yml file.
 
 
 

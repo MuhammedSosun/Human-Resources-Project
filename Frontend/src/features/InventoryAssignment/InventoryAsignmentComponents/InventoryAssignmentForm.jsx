@@ -21,7 +21,7 @@ const InventoryAssignmentForm = ({ open, onClose, onSave, assignment }) => {
     const fetchData = async () => {
         try {
             const [personalList, inventoryList] = await Promise.all([
-                getActivePersonals(), // ✔️ Artık gerçek array döner
+                getActivePersonals(),
                 getUnassignedInventories(),
             ]);
             setPersonals(personalList);

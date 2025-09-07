@@ -196,10 +196,9 @@ public class PersonalControllerImpl extends RestBaseController implements IPerso
     @Override
     public ResponseEntity<Long> getActivePersonalCount() {
         long count = personalService.countActivePersonals();
-        return ResponseEntity.ok(count);
-    }
+        return ResponseEntity.ok(count);    }
     @GetMapping("/list-active")
-    @PreAuthorize("hasAnyRole('ADMIN', 'IK')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'IK','ENVANTER')")
     @Override
     public RootEntity<List<DtoPersonal>> listAllActivePersonals() {
         return ok(personalService.getAllActivePersonals());

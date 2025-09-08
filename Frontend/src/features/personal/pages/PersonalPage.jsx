@@ -9,7 +9,7 @@ import PersonalFilter from "../PersonelComponents/PersonalFilter";
 import PersonalList from "../PersonelComponents/PersonalList";
 import PersonalDetailDialog from "../PersonelComponents/PersonalDetailDialog";
 import PersonalDeleteConfirm from "../PersonelComponents/PersonalDeleteConfirm";
-import { searchPersonals, deletePersonal } from '../services/personalService';
+import { searchPersonals, deletePersonal, searchByRegistrationAndName } from '../services/personalService';
 import PersonelUpdateForm from "../PersonelComponents/PersonelUpdateForm";
 import PersonalForm from "../PersonelComponents/PersonalForm";
 import { useAppState } from "@/context/AppStateContext";
@@ -50,11 +50,20 @@ export function PersonelPage() {
     }, [isFetch]);
 
     const handleFilter = async (filters) => {
+        console.log("Filtre değerleri:", filters);
         setPersonalFilter(filters);
-        const data = await searchPersonals(filters);
-        setPersonelList(data);
-        setPersonelListBackup(data);
+
+        try {
+            const data = await searchByRegistrationAndName(filters);
+            setPersonelList(data);
+            setPersonelListBackup(data);
+        } catch (err) {
+            console.error("Filtreleme hatası:", err);
+            toast.error("Filtreleme başarısız oldu");
+        }
     };
+
+
     const handleDetailOpen = (personel) => {
         setSelectedPersonel(personel);
         setOpenDetail(true);
@@ -67,7 +76,7 @@ export function PersonelPage() {
 
     const handleEditSave = async () => {
         try {
-            const updatedList = await searchPersonals(); // Güncel listeyi tekrar çek
+            const updatedList = await searchPersonals();
             setPersonelList(updatedList);
             toast.success("Personel güncellendi");
         } catch (err) {

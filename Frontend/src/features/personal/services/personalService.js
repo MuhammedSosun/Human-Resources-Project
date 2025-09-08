@@ -2,7 +2,7 @@ import api from '../../../service/axiosInterceptor';
 
 const BASE_URL = `/rest/api/personal`
 export const addPersonal = async (data) => {
-    const response = await api.post(`${BASE_URL}/save`, data); // ✅ doğru
+    const response = await api.post(`${BASE_URL}/save`, data);
     return response.data.payload;
 };
 export const updatePersonal = async (id, data) => {
@@ -51,3 +51,25 @@ export const getMyProfile = async () => {
     const response = await api.get("/rest/api/personal/me");
     return response.data.payload;
 };
+export const searchByRegistrationAndName = async (filters) => {
+    let query = [];
+
+    if (filters.registrationNo) {
+        query.push(`registrationNo=${encodeURIComponent(filters.registrationNo)}`);
+    }
+    if (filters.firstName) {
+        query.push(`firstName=${encodeURIComponent(filters.firstName)}`);
+    }
+    if (filters.lastName) {
+        query.push(`lastName=${encodeURIComponent(filters.lastName)}`);
+    }
+    if (filters.unit) {
+        query.push(`unit=${encodeURIComponent(filters.unit)}`);
+    }
+
+    const queryString = query.length > 0 ? `?${query.join("&")}` : "";
+
+    const response = await api.get(`${BASE_URL}/filterByInfo${queryString}`);
+    return response.data.payload;
+};
+

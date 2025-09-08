@@ -10,7 +10,7 @@ function PhotoViewer({ personelId, size = "small", className = "" }) {
     useEffect(() => {
         const token = localStorage.getItem("accessToken");
         if (!token) {
-            console.warn("⛔ Token yok, fotoğraf isteği iptal.");
+            console.warn("Token yok, fotoğraf isteği iptal.");
             return;
         }
 
@@ -23,7 +23,7 @@ function PhotoViewer({ personelId, size = "small", className = "" }) {
                 const imageUrl = URL.createObjectURL(response.data);
                 setPhotoSrc(imageUrl);
             } catch (e) {
-                console.error("❌ Fotoğraf yüklenemedi:", e);
+                console.error("Fotoğraf yüklenemedi:", e);
                 setPhotoSrc("/images/default-user.png");
             }
         };

@@ -1,5 +1,6 @@
 export const Units = [
     { value: "YAZILIM_GELISTIRME", label: "Yazılım Geliştirme" },
+    { value: "Belirsiz", label: "Belirsiz" },
     { value: "ARGE", label: "AR-GE" },
 ];
 

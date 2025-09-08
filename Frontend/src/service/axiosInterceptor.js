@@ -38,7 +38,7 @@ api.interceptors.response.use(
 
                 const tokens = res.data.payload;
                 const newAccessToken = tokens.accessToken;
-                console.log("✅ Yeni Token:", newAccessToken);
+                console.log("Yeni Token:", newAccessToken);
 
                 saveAccessToken(newAccessToken);
 

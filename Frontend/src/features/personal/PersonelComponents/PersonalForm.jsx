@@ -30,7 +30,7 @@ function PersonalForm({ onSuccess }) {
             try {
 
                 const saved = await addPersonal(values);
-                ("✅ Yeni kayıt edilen personel:", saved);
+                ("Yeni kayıt edilen personel:", saved);
 
                 if (selectedFile) {
                     ("📸 Fotoğraf yükleniyor...");
@@ -38,7 +38,7 @@ function PersonalForm({ onSuccess }) {
                     const reader = new FileReader();
                     reader.onloadend = async () => {
                         const base64Content = reader.result.split(",")[1];
-                        ("📦 base64Content hazır");
+                        ("base64Content hazır");
 
                         try {
                             await uploadPhoto({
@@ -46,7 +46,7 @@ function PersonalForm({ onSuccess }) {
                                 fileName: selectedFile.name,
                                 base64Content,
                             });
-                            ("✅ Fotoğraf yüklendi!");
+                            ("Fotoğraf yüklendi!");
                         } catch (e) {
                             console.warn("⚠️ Fotoğraf yükleme hatası:", e);
                         }
@@ -59,9 +59,9 @@ function PersonalForm({ onSuccess }) {
                     onSuccess();
                 }
             } catch (error) {
-                console.error("🛑 Personel ekleme hatası:", error);
+                console.error("Personel ekleme hatası:", error);
                 if (error.response) {
-                    ("🔥 Backend hatası:", error.response.data);
+                    ("Backend hatası:", error.response.data);
                 }
             }
         }

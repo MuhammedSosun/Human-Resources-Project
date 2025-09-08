@@ -4,6 +4,7 @@ import com.HumanResourcesProject.controller.IPersonalController;
 import com.HumanResourcesProject.controller.RestBaseController;
 import com.HumanResourcesProject.controller.RootEntity;
 import com.HumanResourcesProject.dto.*;
+import com.HumanResourcesProject.enums.Unit;
 import com.HumanResourcesProject.exception.BaseException;
 import com.HumanResourcesProject.exception.ErrorMessage;
 import com.HumanResourcesProject.exception.MessageType;
@@ -84,11 +85,13 @@ public class PersonalControllerImpl extends RestBaseController implements IPerso
     @Override
     public RootEntity<List<DtoPersonal>> searchByRegistrationAndName(@RequestParam(required = false) Integer registrationNo,
                                                                      @RequestParam(required = false) String firstName,
-                                                                     @RequestParam(required = false) String lastName) {
+                                                                     @RequestParam(required = false) String lastName,
+                                                                     @RequestParam(required = false) Unit unit) {
         DtoFilterRegistrationAndName dto = new DtoFilterRegistrationAndName();
         dto.setRegistrationNo(registrationNo);
         dto.setFirstName(firstName);
         dto.setLastName(lastName);
+        dto.setUnit(unit);
         return ok(personalService.searchByRegistrationAndName(dto));
     }
     @GetMapping("/search")

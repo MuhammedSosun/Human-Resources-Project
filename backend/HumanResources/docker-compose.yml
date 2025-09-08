@@ -47,8 +47,6 @@ services:
   #   networks:
   #     - elk
 
-
-
 networks:
   elk:
     driver: bridge

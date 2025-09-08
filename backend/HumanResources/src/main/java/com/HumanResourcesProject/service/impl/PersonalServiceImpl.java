@@ -93,9 +93,10 @@ public class PersonalServiceImpl implements IPersonalService {
         List<Personal> result = personalRepository.findPersonalByRegistrationNoAndName(
                 dto.getRegistrationNo(),
                 dto.getFirstName(),
-                dto.getLastName()
+                dto.getLastName(),
+                dto.getUnit()
         );
-        log.info("🔎 Sicil ve isme göre arama yapılıyor. Sicil No: {}, Ad: {}, Soyad: {}",
+        log.info("Sicil ve isme göre arama yapılıyor. Sicil No: {}, Ad: {}, Soyad: {}",
                 dto.getRegistrationNo(), dto.getFirstName(), dto.getLastName());
         return result.stream().map(PersonalMapper::toDto).toList();
     }

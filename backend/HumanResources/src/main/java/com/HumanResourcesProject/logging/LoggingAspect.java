@@ -28,7 +28,7 @@ public class LoggingAspect {
 
         MDC.put("operation", operation.name());
 
-    log.info("🔹 START [{}] -> Method: {}, Args: {}", operation, methodName, args);
+    log.info("START [{}] -> Method: {}, Args: {}", operation, methodName, args);
 
     try {
         Object result = joinPoint.proceed();
